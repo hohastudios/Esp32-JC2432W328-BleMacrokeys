@@ -45,7 +45,7 @@ String read_sd_directory()
   return options;
 }
 
-void read_config_file(String path) {
+StaticJsonDocument read_config_file(String path) {
   Serial.println(String("Reading file: ") + path);
   if (!SD.begin()) { 
       Serial.println("Card Mount Failed");
@@ -65,11 +65,12 @@ void read_config_file(String path) {
 
   Serial.println("File Content:");
   Serial.println(input);
-  parse_json(input.c_str());
+  StaticJsonDocument<200> doc = parse_json(input.c_str());
+  return doc;
 
 }
 
-void parse_json(const char* input) {
+StaticJsonDocument parse_json(const char* input) {
     StaticJsonDocument<200> doc;
     DeserializationError error = deserializeJson(doc, input);
 
@@ -79,8 +80,6 @@ void parse_json(const char* input) {
       return;
     }
 
-    const char* btn11_label = doc["btn11"]["label"]; // "1"
-    const char* btn11_bind = doc["btn11"]["bind"]; // "1"
-    Serial.println(btn11_label); 
+    return doc;
 }
 

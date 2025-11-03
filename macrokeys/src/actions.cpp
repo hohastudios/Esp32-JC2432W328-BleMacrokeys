@@ -137,7 +137,8 @@ void action_profile_value_changed(lv_event_t *e) {
     /* 2️⃣ Retrieve the currently selected string  */
     lv_roller_get_selected_str(roller, buffer, sizeof(buffer));
 
-    set_selected_str(std::string(buffer).c_str());              // free it after use if set_selected_str() copies it internally
+    set_selected_str(std::string(buffer).c_str()); 
+
 }
 
 /* -------------------------------------------------------------------------- */
@@ -146,9 +147,10 @@ void action_profile_value_changed(lv_event_t *e) {
 
 void action_goto_main_v(lv_event_t * e)
 {
-    //load selected config
-    read_config_file(get_selected_str());
-    //parse json
+    //load selected config and parse json
+    StaticJsonDocument<200> doc = read_config_file(get_selected_str());
+    //map the keys
+
     loadScreen(SCREEN_ID_MAIN);   
 }
 
