@@ -1,0 +1,6 @@
+[submodule "libraries/ESP32-BLE-Keyboard"]
+	path = libraries/ESP32-BLE-Keyboard
+	url = https://github.com/hohastudios/ESP32-BLE-Keyboard.git
+[submodule "eez-studio/macrokeysesp32"]
+	path = eez-studio/macrokeysesp32
+	url = https://github.com/hohastudios/macrokeysesp32.git
