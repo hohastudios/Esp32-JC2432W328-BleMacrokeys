@@ -120,8 +120,7 @@ void setup() {
   lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER);
   lv_indev_set_read_cb(indev, touchpad_read_cb);
   ui_init();
-
-
+  Serial.printf("Free heap: %u bytes\n", ESP.getFreeHeap());
 
 }
 

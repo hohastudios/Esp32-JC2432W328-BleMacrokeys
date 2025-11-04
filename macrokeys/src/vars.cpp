@@ -4,18 +4,20 @@
 BleKeyboard ble_Keyboard;
 String profiles;
 
-const char* lbl_btn_11="B11";
-const char* lbl_btn_12="B12";
-const char* lbl_btn_13="B13";
-const char* lbl_btn_11_1="B11";
-const char* lbl_btn_12_1="B12";
-const char* lbl_btn_13_1="B13";
-const char* lbl_btn_21="B21";
-const char* lbl_btn_22="B22";
-const char* lbl_btn_23="B23";
-const char* lbl_btn_21_1="B21";
-const char* lbl_btn_22_1="B22";
-const char* lbl_btn_23_1="B23";
+char lbl_btn_11[8]  = "B11";
+char lbl_btn_12[8]  = "B12";
+char lbl_btn_13[8]  = "B13";
+char lbl_btn_11_1[8] = "B11";
+char lbl_btn_12_1[8] = "B12";
+char lbl_btn_13_1[8] = "B13";
+char lbl_btn_21[8]  = "B21";
+char lbl_btn_22[8]  = "B22";
+char lbl_btn_23[8]  = "B23";
+char lbl_btn_21_1[8] = "B21";
+char lbl_btn_22_1[8] = "B22";
+char lbl_btn_23_1[8] = "B23";
+
+// ... existing code ...
 const char* selected_str;
 static std::string g_current_selected;
 

@@ -10,95 +10,126 @@ extern BleKeyboard ble_Keyboard;
 extern String profiles;
 
 // Button label globals
-extern const char* lbl_btn_11;
-extern const char* lbl_btn_12;
-extern const char* lbl_btn_13;
-extern const char* lbl_btn_11_1;
-extern const char* lbl_btn_12_1;
-extern const char* lbl_btn_13_1;
-extern const char* lbl_btn_21;
-extern const char* lbl_btn_22;
-extern const char* lbl_btn_23;
-extern const char* lbl_btn_21_1;
-extern const char* lbl_btn_22_1;
-extern const char* lbl_btn_23_1;
+extern char lbl_btn_11[8];
+extern char lbl_btn_12[8];
+extern char lbl_btn_13[8];
+extern char lbl_btn_11_1[8];
+extern char lbl_btn_12_1[8];
+extern char lbl_btn_13_1[8];
+extern char lbl_btn_21[8];
+extern char lbl_btn_22[8];
+extern char lbl_btn_23[8];
+extern char lbl_btn_21_1[8];
+extern char lbl_btn_22_1[8];
+extern char lbl_btn_23_1[8];
 
+inline constexpr size_t MAX_LABEL_LEN = 8;   // adjust as needed
 
 /* --------------------------------------------------------------------
  *  Inline accessors (getters / setters)
  *  ---------------------------------------------------------------*/
 // ------------------------------------------------------------------
+//  Button 12, 13, and the remaining button label arrays
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
 //  Button 11
 // ------------------------------------------------------------------
 inline const char* get_lbl_btn_11() noexcept  { return lbl_btn_11; }
-inline void        set_lbl_btn_11(const char* v) noexcept { lbl_btn_11 = v; }
+inline void set_lbl_btn_11(const char* v) noexcept
+{
+    // copy from the JSON value into a safe, bounded buffer
+    strncpy(lbl_btn_11, v, MAX_LABEL_LEN - 1);
+    lbl_btn_11[MAX_LABEL_LEN - 1] = '\0';   // ensure null‑termination
+}
 
-// ------------------------------------------------------------------
-//  Button 12
-// ------------------------------------------------------------------
+// Getter / Setter for lbl_btn_12
 inline const char* get_lbl_btn_12() noexcept  { return lbl_btn_12; }
-inline void        set_lbl_btn_12(const char* v) noexcept { lbl_btn_12 = v; }
+inline void set_lbl_btn_12(const char* v) noexcept
+{
+    strncpy(lbl_btn_12, v, MAX_LABEL_LEN - 1);
+    lbl_btn_12[MAX_LABEL_LEN - 1] = '\0';
+}
 
-// ------------------------------------------------------------------
-//  Button 13
-// ------------------------------------------------------------------
+// Getter / Setter for lbl_btn_13
 inline const char* get_lbl_btn_13() noexcept  { return lbl_btn_13; }
-inline void        set_lbl_btn_13(const char* v) noexcept { lbl_btn_13 = v; }
+inline void set_lbl_btn_13(const char* v) noexcept
+{
+    strncpy(lbl_btn_13, v, MAX_LABEL_LEN - 1);
+    lbl_btn_13[MAX_LABEL_LEN - 1] = '\0';
+}
 
-// ------------------------------------------------------------------
-//  Button 11_1
-// ------------------------------------------------------------------
+// Getter / Setter for lbl_btn_11_1
 inline const char* get_lbl_btn_11_1() noexcept  { return lbl_btn_11_1; }
-inline void        set_lbl_btn_11_1(const char* v) noexcept { lbl_btn_11_1 = v; }
+inline void set_lbl_btn_11_1(const char* v) noexcept
+{
+    strncpy(lbl_btn_11_1, v, MAX_LABEL_LEN - 1);
+    lbl_btn_11_1[MAX_LABEL_LEN - 1] = '\0';
+}
 
-// ------------------------------------------------------------------
-//  Button 12_1
-// ------------------------------------------------------------------
+// Getter / Setter for lbl_btn_12_1
 inline const char* get_lbl_btn_12_1() noexcept  { return lbl_btn_12_1; }
-inline void        set_lbl_btn_12_1(const char* v) noexcept { lbl_btn_12_1 = v; }
+inline void set_lbl_btn_12_1(const char* v) noexcept
+{
+    strncpy(lbl_btn_12_1, v, MAX_LABEL_LEN - 1);
+    lbl_btn_12_1[MAX_LABEL_LEN - 1] = '\0';
+}
 
-// ------------------------------------------------------------------
-//  Button 13_1
-// ------------------------------------------------------------------
+// Getter / Setter for lbl_btn_13_1
 inline const char* get_lbl_btn_13_1() noexcept  { return lbl_btn_13_1; }
-inline void        set_lbl_btn_13_1(const char* v) noexcept { lbl_btn_13_1 = v; }
+inline void set_lbl_btn_13_1(const char* v) noexcept
+{
+    strncpy(lbl_btn_13_1, v, MAX_LABEL_LEN - 1);
+    lbl_btn_13_1[MAX_LABEL_LEN - 1] = '\0';
+}
 
-// ------------------------------------------------------------------
-//  Button 21
-// ------------------------------------------------------------------
+// Getter / Setter for lbl_btn_21
 inline const char* get_lbl_btn_21() noexcept  { return lbl_btn_21; }
-inline void        set_lbl_btn_21(const char* v) noexcept { lbl_btn_21 = v; }
+inline void set_lbl_btn_21(const char* v) noexcept
+{
+    strncpy(lbl_btn_21, v, MAX_LABEL_LEN - 1);
+    lbl_btn_21[MAX_LABEL_LEN - 1] = '\0';
+}
 
-// ------------------------------------------------------------------
-//  Button 22
-// ------------------------------------------------------------------
+// Getter / Setter for lbl_btn_22
 inline const char* get_lbl_btn_22() noexcept  { return lbl_btn_22; }
-inline void        set_lbl_btn_22(const char* v) noexcept { lbl_btn_22 = v; }
+inline void set_lbl_btn_22(const char* v) noexcept
+{
+    strncpy(lbl_btn_22, v, MAX_LABEL_LEN - 1);
+    lbl_btn_22[MAX_LABEL_LEN - 1] = '\0';
+}
 
-// ------------------------------------------------------------------
-//  Button 23
-// ------------------------------------------------------------------
+// Getter / Setter for lbl_btn_23
 inline const char* get_lbl_btn_23() noexcept  { return lbl_btn_23; }
-inline void        set_lbl_btn_23(const char* v) noexcept { lbl_btn_23 = v; }
+inline void set_lbl_btn_23(const char* v) noexcept
+{
+    strncpy(lbl_btn_23, v, MAX_LABEL_LEN - 1);
+    lbl_btn_23[MAX_LABEL_LEN - 1] = '\0';
+}
 
-// ------------------------------------------------------------------
-//  Button 21_1
-// ------------------------------------------------------------------
+// Getter / Setter for lbl_btn_21_1
 inline const char* get_lbl_btn_21_1() noexcept  { return lbl_btn_21_1; }
-inline void        set_lbl_btn_21_1(const char* v) noexcept { lbl_btn_21_1 = v; }
+inline void set_lbl_btn_21_1(const char* v) noexcept
+{
+    strncpy(lbl_btn_21_1, v, MAX_LABEL_LEN - 1);
+    lbl_btn_21_1[MAX_LABEL_LEN - 1] = '\0';
+}
 
-// ------------------------------------------------------------------
-//  Button 22_1
-// ------------------------------------------------------------------
+// Getter / Setter for lbl_btn_22_1
 inline const char* get_lbl_btn_22_1() noexcept  { return lbl_btn_22_1; }
-inline void        set_lbl_btn_22_1(const char* v) noexcept { lbl_btn_22_1 = v; }
+inline void set_lbl_btn_22_1(const char* v) noexcept
+{
+    strncpy(lbl_btn_22_1, v, MAX_LABEL_LEN - 1);
+    lbl_btn_22_1[MAX_LABEL_LEN - 1] = '\0';
+}
 
-// ------------------------------------------------------------------
-//  Button 23_1
-// ------------------------------------------------------------------
+// Getter / Setter for lbl_btn_23_1
 inline const char* get_lbl_btn_23_1() noexcept  { return lbl_btn_23_1; }
-inline void        set_lbl_btn_23_1(const char* v) noexcept { lbl_btn_23_1 = v; }
-
+inline void set_lbl_btn_23_1(const char* v) noexcept
+{
+    strncpy(lbl_btn_23_1, v, MAX_LABEL_LEN - 1);
+    lbl_btn_23_1[MAX_LABEL_LEN - 1] = '\0';
+}
 void   set_selected_str(const char *str);
 const char *get_selected_str(void);   // returns a `const char*`
 

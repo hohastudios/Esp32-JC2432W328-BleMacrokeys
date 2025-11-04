@@ -3,16 +3,6 @@
 #include <FS.h>
 #include <ArduinoJson.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-StaticJsonDocument parse_json(const char* input);
-
-#ifdef __cplusplus
-}
-#endif
-
-StaticJsonDocument read_config_file(String path); 
+const char* read_config_file(String path); 
 String read_sd_directory();
 #endif /* CONFIGREADER_H */

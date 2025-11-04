@@ -10,6 +10,7 @@
 #include "ui.h"
 #include "configreader.h"
 #include <BleKeyboard.h>
+#include "keymapper.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -148,9 +149,10 @@ void action_profile_value_changed(lv_event_t *e) {
 void action_goto_main_v(lv_event_t * e)
 {
     //load selected config and parse json
-    StaticJsonDocument<200> doc = read_config_file(get_selected_str());
+    const char* cfg = read_config_file(get_selected_str());
     //map the keys
-
+    populate_button_lbl_vars(cfg);
+    delete[] const_cast<char*>(cfg); 
     loadScreen(SCREEN_ID_MAIN);   
 }
 

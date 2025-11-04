@@ -1,4 +1,5 @@
 #include <ArduinoJson.h>
+#include <jsonlib.h>
 #include "configreader.h"
 #include <SD.h>
 #include <SPI.h>
@@ -45,41 +46,30 @@ String read_sd_directory()
   return options;
 }
 
-StaticJsonDocument read_config_file(String path) {
+const char* read_config_file(String path) {
   Serial.println(String("Reading file: ") + path);
-  if (!SD.begin()) { 
-      Serial.println("Card Mount Failed");
-      return;
-  }
-  File file = SD.open("/macrokeys/config/" + path);
+
+  String fullPath = String("/macrokeys/config/") + path;
+  File file = SD.open(fullPath.c_str());
+
   if (!file || file.isDirectory()) {
-    Serial.println("Failed to open file for reading");
-    return;
+      const char* errMsg = "{\"error\":\"path error\"}";
+      char* buffer = new char[strlen(errMsg) + 1];
+      strcpy(buffer, errMsg);
+      return buffer; 
   }
 
-  String input;
+  String input="";
   while (file.available()) {
     input += char(file.read());
   }
+  
+  // Allocate memory for the const char* and copy the string
+  char* buffer = new char[input.length() + 1];
+  strcpy(buffer, input.c_str());
+  
   file.close();
+  return buffer;
 
-  Serial.println("File Content:");
-  Serial.println(input);
-  StaticJsonDocument<200> doc = parse_json(input.c_str());
-  return doc;
-
-}
-
-StaticJsonDocument parse_json(const char* input) {
-    StaticJsonDocument<200> doc;
-    DeserializationError error = deserializeJson(doc, input);
-
-    if (error) {
-      Serial.print("parse_json() failed: ");
-      Serial.println(error.c_str());
-      return;
-    }
-
-    return doc;
 }
 
