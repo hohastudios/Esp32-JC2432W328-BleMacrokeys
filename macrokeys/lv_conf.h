@@ -1,7 +1,7 @@
 #ifndef LV_CONF_H
 #define LV_CONF_H
 
-#define LV_USE_PERF_MONITOR     0
+#define LV_USE_PERF_MONITOR     1
 #define LV_USE_LOG              0
 #define LV_USE_ASSERT_NULL      1
 #define LV_USE_DRAW_SW          1
@@ -23,10 +23,10 @@
 #define LV_USE_DISPLAY          1
 
 // Add other widgets as needed
-#define LV_USE_BTNMATRIX        1
-#define LV_USE_SWITCH           1
-#define LV_USE_SLIDER           1
+#define LV_USE_BTNMATRIX        0
+#define LV_USE_SWITCH           0
+#define LV_USE_SLIDER           0
 #define LV_USE_ARC              1
-#define LV_USE_IMG              1
+#define LV_USE_IMG              0
 
 #endif // LV_CONF_H

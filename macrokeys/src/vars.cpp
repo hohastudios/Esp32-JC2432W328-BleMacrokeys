@@ -17,7 +17,22 @@ char lbl_btn_21_1[8] = "B21";
 char lbl_btn_22_1[8] = "B22";
 char lbl_btn_23_1[8] = "B23";
 
-// ... existing code ...
+/* --------------------------------------------------------------------
+ *  Default button bindings
+ * -------------------------------------------------------------------- */
+char bind_btn_11[4]   = "1";
+char bind_btn_12[4]   = "2";
+char bind_btn_13[4]   = "3";
+char bind_btn_11_1[4] = "4";
+char bind_btn_12_1[4] = "5";
+char bind_btn_13_1[4] = "6";
+char bind_btn_21[4]   = "1";
+char bind_btn_22[4]   = "2";
+char bind_btn_23[4]   = "3";
+char bind_btn_21_1[4] = "4";
+char bind_btn_22_1[4] = "5";
+char bind_btn_23_1[4] = "6";
+
 const char* selected_str;
 static std::string g_current_selected;
 

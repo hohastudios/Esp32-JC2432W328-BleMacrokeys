@@ -457,4 +457,59 @@ void create_screens() {
     
     create_screen_startup();
     create_screen_main();
+    init_label_ptrs();
+}
+
+struct LabelMap
+{
+    const char*  name;          // literal name of the lbl_… buffer
+    const char* (* getter)();   // pointer to the getter function
+};
+
+
+static const LabelMap lbl_mapper[] = {
+    { "lbl11",  get_lbl_btn_11 },
+    { "lbl12",  get_lbl_btn_12 },
+    { "lbl13",  get_lbl_btn_13 },
+    { "lbl11_1", get_lbl_btn_11_1 },
+    { "lbl12_1", get_lbl_btn_12_1 },
+    { "lbl13_1", get_lbl_btn_13_1 },
+    { "lbl21",  get_lbl_btn_21 },
+    { "lbl22",  get_lbl_btn_22 },
+    { "lbl23",  get_lbl_btn_23 },
+    { "lbl21_1", get_lbl_btn_21_1 },
+    { "lbl22_1", get_lbl_btn_22_1 },
+    { "lbl23_1", get_lbl_btn_23_1 }
+};
+
+constexpr size_t lbl_mapper_count = sizeof(lbl_mapper) / sizeof(*lbl_mapper);
+
+// --------------------------------------------------------------------------
+//  Updated helper – looks up the appropriate getter function
+// --------------------------------------------------------------------------
+static const char* (*find_lbl_getter(const char *lbl_name))() {
+    for (size_t i = 0; i < lbl_mapper_count; ++i) {
+        if (strcmp(lbl_mapper[i].name, lbl_name) == 0) {
+            return lbl_mapper[i].getter;      // found it
+        }
+    }
+    return nullptr;                         // nobody matched
+}
+
+
+void set_label_text(lv_obj_t *lbl, const char *txt)
+{
+    auto getter = find_lbl_getter(txt);
+    if (!getter) {
+        lv_label_set_text(lbl, "(unknown)");   // graceful fallback
+        return;
+    }
+
+    const char *lbl_txt = getter();
+
+    lv_label_set_text(lbl, lbl_txt);
+}
+
+void set_all_label_text(){  
+    FOR_EACH_LABEL(objects, set_label_text);
 }

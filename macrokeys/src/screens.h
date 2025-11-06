@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+#define NUM_LABELS 12  
+
 typedef struct _objects_t {
     lv_obj_t *startup;
     lv_obj_t *main;
@@ -40,9 +42,48 @@ typedef struct _objects_t {
     lv_obj_t *lbl13_1;
     lv_obj_t *btn12_1;
     lv_obj_t *lbl12_1;
+    lv_obj_t *label_ptrs[NUM_LABELS];
 } objects_t;
 
 extern objects_t objects;
+
+inline void init_label_ptrs(void)
+{
+    objects.label_ptrs[0]  = objects.lbl12;
+    objects.label_ptrs[1]  = objects.lbl13;
+    objects.label_ptrs[2]  = objects.lbl23;
+    objects.label_ptrs[3]  = objects.lbl11;
+    objects.label_ptrs[4]  = objects.lbl22;
+    objects.label_ptrs[5]  = objects.lbl21;
+    objects.label_ptrs[6]  = objects.lbl23_1;
+    objects.label_ptrs[7]  = objects.lbl22_1;
+    objects.label_ptrs[8]  = objects.lbl21_1;
+    objects.label_ptrs[9]  = objects.lbl11_1;
+    objects.label_ptrs[10] = objects.lbl13_1;
+    objects.label_ptrs[11] = objects.lbl12_1;
+}
+
+/* ------------------------------------------------------------------------- */
+/*  Macro that iterates over all labels in the `label_ptrs` array.             */
+/*  Usage example:                                                           */
+/*      FOR_EACH_LABEL(objects, set_label_text);     // set_label_text takes lv_obj_t* */ 
+/* ------------------------------------------------------------------------- */
+
+static const char *label_names[NUM_LABELS] = {
+    "lbl12",  "lbl13",  "lbl23",  "lbl11",
+    "lbl22",  "lbl21",  "lbl23_1", "lbl22_1",
+    "lbl21_1","lbl11_1","lbl13_1","lbl12_1"
+};
+
+#define FOR_EACH_LABEL(obj, expr) \
+    do { \
+        for (int _i = 0; _i < NUM_LABELS; ++_i) { \
+            expr((obj).label_ptrs[_i], label_names[_i]); \
+        } \
+    } while (0)
+
+void set_label_text(lv_obj_t *lbl, const char *txt);
+extern void set_all_label_text();
 
 enum ScreensEnum {
     SCREEN_ID_STARTUP = 1,

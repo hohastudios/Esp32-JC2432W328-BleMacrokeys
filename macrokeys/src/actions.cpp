@@ -1,8 +1,8 @@
 /* -------------------------------------------------------------------------- */
-/*  Button press handlers – log the press and send a ‘r’ keystroke if a BLE   */
+/*  Button press handlers – log the press and send the configured key if a BLE   */
 /*  keyboard is connected.                                                     */
 /* -------------------------------------------------------------------------- */
-#include <lvgl.h>  
+#include <lvgl.h>
 #include <Arduino.h>
 #include "actions.h"
 #include "vars.h"
@@ -21,7 +21,7 @@ void action_btn_11_pressed(lv_event_t * e)
     Serial.println(String("✅ ") + lbl_btn_11 + " Pressed!");
     if (ble_Keyboard.isConnected()) {
         Serial.println(F("✅ Sending key stroke!"));
-        ble_Keyboard.print("r");
+        ble_Keyboard.print(bind_btn_11);      // <-- use bound key
     }
 }
 
@@ -30,7 +30,7 @@ void action_btn_12_pressed(lv_event_t * e)
     Serial.println(String("✅ ") + lbl_btn_12 + " Pressed!");
     if (ble_Keyboard.isConnected()) {
         Serial.println(F("✅ Sending key stroke!"));
-        ble_Keyboard.print("r");
+        ble_Keyboard.print(bind_btn_12);      // <-- use bound key
     }
 }
 
@@ -39,7 +39,7 @@ void action_btn_13_pressed(lv_event_t * e)
     Serial.println(String("✅ ") + lbl_btn_13 + " Pressed!");
     if (ble_Keyboard.isConnected()) {
         Serial.println(F("✅ Sending key stroke!"));
-        ble_Keyboard.print("r");
+        ble_Keyboard.print(bind_btn_13);      // <-- use bound key
     }
 }
 
@@ -53,7 +53,7 @@ void action_btn_11_1_pressed(lv_event_t * e)
     Serial.println(String("✅ ") + lbl_btn_11_1 + " Pressed!");
     if (ble_Keyboard.isConnected()) {
         Serial.println(F("✅ Sending key stroke!"));
-        ble_Keyboard.print("r");
+        ble_Keyboard.print(bind_btn_11_1);    // <-- use bound key
     }
 }
 
@@ -62,7 +62,7 @@ void action_btn_12_1_pressed(lv_event_t * e)
     Serial.println(String("✅ ") + lbl_btn_12_1 + " Pressed!");
     if (ble_Keyboard.isConnected()) {
         Serial.println(F("✅ Sending key stroke!"));
-        ble_Keyboard.print("r");
+        ble_Keyboard.print(bind_btn_12_1);    // <-- use bound key
     }
 }
 
@@ -71,7 +71,7 @@ void action_btn_13_1_pressed(lv_event_t * e)
     Serial.println(String("✅ ") + lbl_btn_13_1 + " Pressed!");
     if (ble_Keyboard.isConnected()) {
         Serial.println(F("✅ Sending key stroke!"));
-        ble_Keyboard.print("r");
+        ble_Keyboard.print(bind_btn_13_1);    // <-- use bound key
     }
 }
 
@@ -80,7 +80,7 @@ void action_btn_21_pressed(lv_event_t * e)
     Serial.println(String("✅ ") + lbl_btn_21 + " Pressed!");
     if (ble_Keyboard.isConnected()) {
         Serial.println(F("✅ Sending key stroke!"));
-        ble_Keyboard.print("r");
+        ble_Keyboard.print(bind_btn_21);      // <-- use bound key
     }
 }
 
@@ -89,7 +89,7 @@ void action_btn_22_pressed(lv_event_t * e)
     Serial.println(String("✅ ") + lbl_btn_22 + " Pressed!");
     if (ble_Keyboard.isConnected()) {
         Serial.println(F("✅ Sending key stroke!"));
-        ble_Keyboard.print("r");
+        ble_Keyboard.print(bind_btn_22);      // <-- use bound key
     }
 }
 
@@ -98,7 +98,7 @@ void action_btn_23_pressed(lv_event_t * e)
     Serial.println(String("✅ ") + lbl_btn_23 + " Pressed!");
     if (ble_Keyboard.isConnected()) {
         Serial.println(F("✅ Sending key stroke!"));
-        ble_Keyboard.print("r");
+        ble_Keyboard.print(bind_btn_23);      // <-- use bound key
     }
 }
 
@@ -107,7 +107,7 @@ void action_btn_21_1_pressed(lv_event_t * e)
     Serial.println(String("✅ ") + lbl_btn_21_1 + " Pressed!");
     if (ble_Keyboard.isConnected()) {
         Serial.println(F("✅ Sending key stroke!"));
-        ble_Keyboard.print("r");
+        ble_Keyboard.print(bind_btn_21_1);    // <-- use bound key
     }
 }
 
@@ -116,8 +116,8 @@ void action_btn_22_1_pressed(lv_event_t * e)
     Serial.println(String("✅ ") + lbl_btn_22_1 + " Pressed!");
     if (ble_Keyboard.isConnected()) {
         Serial.println(F("✅ Sending key stroke!"));
-        ble_Keyboard.print("r");
-     }
+        ble_Keyboard.print(bind_btn_22_1);    // <-- use bound key
+    }
 }
 
 void action_btn_23_1_pressed(lv_event_t * e)
@@ -125,21 +125,21 @@ void action_btn_23_1_pressed(lv_event_t * e)
     Serial.println(String("✅ ") + lbl_btn_23_1 + " Pressed!");
     if (ble_Keyboard.isConnected()) {
         Serial.println(F("✅ Sending key stroke!"));
-        ble_Keyboard.print("r");
+        ble_Keyboard.print(bind_btn_23_1);    // <-- use bound key
     }
 }
 
 
-void action_profile_value_changed(lv_event_t *e) {
-    //* 1️⃣ Fetch the roller that fired the event  */
+void action_profile_value_changed(lv_event_t *e)
+{
+    /* 1️⃣ Fetch the roller that fired the event */
     lv_obj_t *roller = (lv_obj_t *)lv_event_get_target(e);
 
-    char buffer[64]; 
-    /* 2️⃣ Retrieve the currently selected string  */
+    char buffer[64];
+    /* 2️⃣ Retrieve the currently selected string */
     lv_roller_get_selected_str(roller, buffer, sizeof(buffer));
 
-    set_selected_str(std::string(buffer).c_str()); 
-
+    set_selected_str(std::string(buffer).c_str());
 }
 
 /* -------------------------------------------------------------------------- */
@@ -148,12 +148,13 @@ void action_profile_value_changed(lv_event_t *e) {
 
 void action_goto_main_v(lv_event_t * e)
 {
-    //load selected config and parse json
+    // load selected config and parse json
     const char* cfg = read_config_file(get_selected_str());
-    //map the keys
+    // map the keys
     populate_button_lbl_vars(cfg);
-    delete[] const_cast<char*>(cfg); 
-    loadScreen(SCREEN_ID_MAIN);   
+    set_all_label_text();
+    delete[] const_cast<char*>(cfg);
+    loadScreen(SCREEN_ID_MAIN);
 }
 
 void action_goto_profile_v(lv_event_t * e)
