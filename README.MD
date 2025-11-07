@@ -3,15 +3,15 @@
 ## Features 
  - EEZ studio -> LVGl mative cpp implementation
 
- - BleKeyboard library
+ - BleKeyboard library (uses NimBLE so save RAM)
 
  - Loads json profiles from Sd card by reading macrokeys/config folder
 
- - Two Tab 3x2 Custom buttons, button box
+ - Two Tabbed 3x2 Custom buttons, button box
 
-Todo: deserialise json and map from config
+- Deserialises json and button map from config
 
-## Flow diagram (on going)
+## Flow diagram
 ```mermaid
 sequenceDiagram
     participant User
@@ -33,10 +33,14 @@ sequenceDiagram
     User->>OkButton: Press OK
     OkButton->>ProfileSelectorView: OnOkPressed()
     ProfileSelectorView->>configReader: ChangeScreen(MainPage)
+    OkButton-->>Actions: Switch to MainPage (dotted)
     configReader->>configReader: Load JSON file path
     configReader->>configReader: Deserialize JSON object
-    configReader->>Vars: Load label and button mappings
-    configReader-->>MainPage: Switch to MainPage
+    configReader->>Actions: Pass handler with JSON data
+    
+    Actions->>Vars: Populate with labels and key bindings from JSON
+    Actions->>MainPage: Set labels with populated data
+    Actions->>MainPage: Switch to MainPage
 
     MainPage->>MainPage: OnMainPageLoad()
     MainPage->>Vars: Get label mappings
