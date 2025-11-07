@@ -1,7 +1,7 @@
 # Bluetooth Macrokeys ESP32 JC2432W28C Guition implementation
 
 ## Features 
- - EEZ studio -> LVGl mative cpp implementation
+ - EEZ studio -> LVGl native cpp implementation
 
  - BleKeyboard library (uses NimBLE so save RAM)
 
