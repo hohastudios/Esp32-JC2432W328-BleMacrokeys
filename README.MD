@@ -3,7 +3,7 @@
 ## Features 
  - EEZ studio -> LVGl native cpp implementation
 
- - BleKeyboard library (uses NimBLE so save RAM)
+ - BleKeyboard library (uses NimBLE to save RAM)
 
  - Loads json profiles from Sd card by reading macrokeys/config folder
 
